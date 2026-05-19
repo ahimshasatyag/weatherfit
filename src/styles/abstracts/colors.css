@@ -1,0 +1,7 @@
+/* Base color palette for generic fallbacks, mostly handled by Tailwind v4 */
+:root {
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #ffffff;
+  --color-black: #000000;
+}

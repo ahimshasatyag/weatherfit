@@ -1,0 +1,11 @@
+[data-theme="sunny"] {
+  --theme-bg-gradient: linear-gradient(to bottom right, #fbbf24, #f59e0b, #d97706);
+  --theme-text-primary: #451a03; /* Amber 950 - Very Dark Brown */
+  --theme-text-secondary: #78350f; /* Amber 900 - Dark Brown */
+  --theme-glass-bg: rgba(255, 255, 255, 0.4);
+  --theme-glass-border: rgba(255, 255, 255, 0.5);
+  --theme-btn-bg: #451a03;
+  --theme-btn-text: #fef3c7;
+  --theme-logo-from: #c2410c; /* orange-700 */
+  --theme-logo-to: #9f1239; /* rose-700 */
+}

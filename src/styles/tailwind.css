@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@import "./variables.css";
+
+@theme {
+  --color-theme-bg: var(--theme-bg-gradient);
+  --color-theme-text-primary: var(--theme-text-primary);
+  --color-theme-text-secondary: var(--theme-text-secondary);
+  --color-theme-glass-bg: var(--theme-glass-bg);
+  --color-theme-glass-border: var(--theme-glass-border);
+  --color-theme-btn-bg: var(--theme-btn-bg);
+  --color-theme-btn-text: var(--theme-btn-text);
+  --color-theme-logo-from: var(--theme-logo-from);
+  --color-theme-logo-to: var(--theme-logo-to);
+
+  /* Custom Animations */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-delayed: float 6s ease-in-out 3s infinite;
+  --animate-slide-up: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+body {
+  background: var(--theme-bg-gradient);
+  color: var(--theme-text-primary);
+  font-family: var(--font-base, 'Inter', sans-serif);
+  @apply overflow-x-hidden min-h-screen transition-colors duration-500 ease-in-out;
+}
+
+.glass {
+  background: var(--theme-glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--theme-glass-border);
+  @apply transition-colors duration-500 ease-in-out;
+}

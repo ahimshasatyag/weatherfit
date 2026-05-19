@@ -1,0 +1,4 @@
+/* Custom typography variables if needed */
+:root {
+  --font-base: 'Inter', sans-serif;
+}

@@ -1,0 +1,5 @@
+/* Custom spacing variables if needed */
+:root {
+  --app-padding: 1.5rem;
+  --navbar-height: 5rem;
+}
