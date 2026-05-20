@@ -1,19 +1,25 @@
 <script setup lang="ts">
 import Navbar from '@/shared/components/Navbar.vue'
+import Footer from '@/shared/components/Footer.vue'
 import AiBubble from '@/modules/ai/pages/AiBubble.vue'
 </script>
 
 <template>
-  <div class="min-h-screen w-full relative">
-    <!-- Premium Navbar -->
-    <Navbar />
+  <div class="min-h-screen w-full relative flex flex-col justify-between">
+    <div class="w-full flex-1 flex flex-col">
+      <!-- Premium Navbar -->
+      <Navbar />
 
-    <!-- Dynamic Page Content with Transitions -->
-    <router-view v-slot="{ Component }">
-      <transition name="page" mode="out-in">
-        <component :is="Component" />
-      </transition>
-    </router-view>
+      <!-- Dynamic Page Content with Transitions -->
+      <router-view v-slot="{ Component }">
+        <transition name="page" mode="out-in">
+          <component :is="Component" class="flex-1" />
+        </transition>
+      </router-view>
+    </div>
+
+    <!-- Premium Footer -->
+    <Footer />
 
     <!-- Global AI Chat Bubble -->
     <AiBubble />

@@ -4,6 +4,7 @@ import MainLayout from '@/layouts/MainLayout.vue'
 import EmptyLayout from '@/layouts/EmptyLayout.vue'
 import NewHomePage from '@/modules/home/pages/HomePage.vue'
 import WeatherGeneratorPage from '@/modules/weather/pages/HomePage.vue'
+import OutfitPage from '@/modules/outfit/pages/Outfit.vue'
 import NotFoundPage from '@/modules/error/pages/NotFoundPage.vue'
 
 const routes = [
@@ -20,6 +21,11 @@ const routes = [
                 path: 'weather',
                 name: 'weather-generator',
                 component: WeatherGeneratorPage,
+            },
+            {
+                path: 'outfit',
+                name: 'outfit',
+                component: OutfitPage,
             }
         ]
     },
