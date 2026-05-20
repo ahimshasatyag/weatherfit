@@ -2,18 +2,27 @@ export const aiChatService = {
   /**
    * Connects to Google Gemini API to get intelligent styling responses.
    */
-  async getResponse(message: string): Promise<string> {
+  async getResponse(message: string, base64Image?: string): Promise<string> {
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY
     if (!apiKey) {
       throw new Error("Gemini API Key is missing!")
     }
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`
 
-    const payload = {
-      contents: [{
-        parts: [{ 
-          text: `You are Satya, a friendly, professional AI Fashion Stylist. You help users pick outfits based on weather, occasions, and personal style. 
+    const parts: any[] = []
+
+    if (base64Image) {
+      parts.push({
+        inlineData: {
+          mimeType: "image/jpeg",
+          data: base64Image.split(',')[1]
+        }
+      })
+    }
+
+    parts.push({
+      text: `You are Satya, a friendly, professional AI Fashion Stylist. You help users pick outfits based on weather, occasions, and personal style. 
 
 Rules:
 1. Always respond in the language used by the user (e.g., if they ask in Indonesian, reply in Indonesian).
@@ -27,9 +36,14 @@ Rules:
    - Rainy/Stormy outfit: ![Rain Coat Style](https://images.unsplash.com/photo-1559551409-dadc959f76b8?q=80&w=400&auto=format&fit=crop)
    - Elegant fashion: ![Elegant Look](https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=400&auto=format&fit=crop)
 4. Keep your answers concise, engaging, and directly related to fashion or weather. Do not break character.
+5. If the user has uploaded a photo of their wardrobe/clothing, analyze the image and give a creative, matching styling recommendation that incorporates the clothes in their photo!
 
-User message: ${message}` 
-        }]
+User message: ${message}`
+    })
+
+    const payload = {
+      contents: [{
+        parts: parts
       }]
     }
 
@@ -43,7 +57,14 @@ User message: ${message}`
       })
 
       if (!response.ok) {
-        throw new Error(`API Error: ${response.statusText}`)
+        let errorMessage = `Status ${response.status}`
+        try {
+          const errorJson = await response.json()
+          if (errorJson.error?.message) {
+            errorMessage = errorJson.error.message
+          }
+        } catch (_) {}
+        throw new Error(`API Error: ${errorMessage}`)
       }
 
       const data = await response.json()
