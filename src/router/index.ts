@@ -6,6 +6,7 @@ import NewHomePage from '@/modules/home/pages/HomePage.vue'
 import WeatherGeneratorPage from '@/modules/weather/pages/HomePage.vue'
 import OutfitPage from '@/modules/outfit/pages/Outfit.vue'
 import NotFoundPage from '@/modules/error/pages/NotFoundPage.vue'
+import ExplorePage from '@/modules/explorer/pages/ExplorePage.vue'
 
 const routes = [
     {
@@ -26,6 +27,11 @@ const routes = [
                 path: 'outfit',
                 name: 'outfit',
                 component: OutfitPage,
+            },
+            {
+                path: 'explore',
+                name: 'explore',
+                component: ExplorePage,
             }
         ]
     },

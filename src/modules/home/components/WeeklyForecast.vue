@@ -1,5 +1,18 @@
 <script setup lang="ts">
-const forecast = [
+import { computed } from 'vue'
+
+const props = withDefaults(defineProps<{
+  forecast?: Array<{
+    day: string
+    temp: number
+    icon: string
+    outfitThumb: string
+  }>
+}>(), {
+  forecast: () => []
+})
+
+const defaultForecast = [
   { day: 'Mon', temp: 24, icon: '⛅', outfitThumb: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=150&auto=format&fit=crop' },
   { day: 'Tue', temp: 26, icon: '☀️', outfitThumb: 'https://images.unsplash.com/photo-1596755094514-f87e32f85e2c?q=80&w=150&auto=format&fit=crop' },
   { day: 'Wed', temp: 22, icon: '🌧️', outfitThumb: 'https://images.unsplash.com/photo-1559551409-dadc959f76b8?q=80&w=150&auto=format&fit=crop' },
@@ -8,6 +21,10 @@ const forecast = [
   { day: 'Sat', temp: 28, icon: '☀️', outfitThumb: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=150&auto=format&fit=crop' },
   { day: 'Sun', temp: 27, icon: '☀️', outfitThumb: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=150&auto=format&fit=crop' },
 ]
+
+const activeForecast = computed(() => {
+  return props.forecast && props.forecast.length > 0 ? props.forecast : defaultForecast
+})
 </script>
 
 <template>
@@ -16,7 +33,7 @@ const forecast = [
     
     <div class="flex gap-4 overflow-x-auto pb-4 snap-x scrollbar-hide" style="scrollbar-width: none;">
       <div 
-        v-for="(day, index) in forecast" 
+        v-for="(day, index) in activeForecast" 
         :key="day.day"
         class="min-w-[100px] flex flex-col items-center p-4 rounded-3xl glass snap-center hover:-translate-y-2 transition-transform duration-300 cursor-pointer"
         :style="{ animationDelay: `${index * 0.1}s` }"
