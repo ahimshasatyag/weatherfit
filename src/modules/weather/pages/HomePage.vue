@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { weatherApi } from '@/modules/weather/api/weather.api'
 import { useTheme } from '@/shared/composables/useTheme'
+import { useWeatherStore } from '@/modules/weather/stores/weather.store'
 
 const city = ref('')
 const isLoading = ref(false)
@@ -37,6 +38,11 @@ const fetchWeather = async () => {
       }
     })
     weatherData.value = response.data
+    
+    // Set weather in the Pinia store so it syncs real-time with Outfit page and AI
+    const weatherStore = useWeatherStore()
+    weatherStore.temperature = Math.round(response.data.main.temp - 273.15)
+    weatherStore.condition = response.data.weather[0].main
     
     // Automatically change the visual theme based on the weather condition
     if (response.data.weather && response.data.weather.length > 0) {
