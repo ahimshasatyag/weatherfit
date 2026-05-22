@@ -44,3 +44,4 @@ npm run build
 ## API
 - https://openweathermap.org/
 - https://aistudio.google.com/
+- https://www.lightxeditor.com/
