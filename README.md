@@ -40,3 +40,7 @@ npm run dev
 ```sh
 npm run build
 ```
+
+## API
+- https://openweathermap.org/
+- https://aistudio.google.com/
